@@ -11,3 +11,14 @@ export const setTokens = (values, cb) => {
     cb();
   });
 };
+
+export const getTokens = cb => {
+  return AsyncStorage.multiGet([
+    '@nba_app@token',
+    '@nba_app@refreshToken',
+    '@nba_app@expireToken',
+    '@nba_app@uid',
+  ]).then(value => {
+    cb(value);
+  });
+};

@@ -14,3 +14,5 @@ export const SIGNUP = `https://identitytoolkit.googleapis.com/v1/accounts:signUp
 
 export const SIGNIN = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${firebaseConfig.apiKey}
 `;
+
+export const AUTOSIGNIN = `https://securetoken.googleapis.com/v1/token?key=${firebaseConfig.apiKey}`;

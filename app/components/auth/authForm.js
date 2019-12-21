@@ -7,6 +7,7 @@ import ValidationRules from '../../utils/forms/validationRules';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {signUp, signIn} from '../../store/actions/user_action';
+import {setTokens, getTokens} from '../../utils/storage';
 
 class AuthFormComponent extends Component {
   state = {
@@ -102,13 +103,11 @@ class AuthFormComponent extends Component {
 
     if (isFormValid) {
       if (this.state.type === 'Login') {
-        this.props.signIn(isFormSubmit).then(res => {
-          console.log(res);
+        this.props.signIn(isFormSubmit).then(() => {
           this.manageAccess();
         });
       } else {
-        this.props.signUp(isFormSubmit).then(res => {
-          console.log(res);
+        this.props.signUp(isFormSubmit).then(() => {
           this.manageAccess();
         });
       }
@@ -134,10 +133,12 @@ class AuthFormComponent extends Component {
         hasErrors: true,
       });
     } else {
-      this.setState({
-        hasErrors: false,
+      setTokens(this.props.User.auth, () => {
+        this.setState({
+          hasErrors: false,
+        });
+        this.props.goNext();
       });
-      this.props.goNext();
     }
   };
 

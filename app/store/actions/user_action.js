@@ -1,7 +1,13 @@
-import {SIGN_UP, SIGN_IN} from '../types';
+import {SIGN_UP, SIGN_IN, AUTO_SIGN_IN} from '../types';
 
 import axios from 'axios';
-import {SIGNUP, SIGNIN, FIREBASEURL, REFRESH} from '../../utils/misc';
+import {
+  SIGNUP,
+  SIGNIN,
+  AUTOSIGNIN,
+  FIREBASEURL,
+  REFRESH,
+} from '../../utils/misc';
 
 export function signUp(data) {
   const request = axios({
@@ -51,6 +57,31 @@ export function signIn(data) {
 
   return {
     type: SIGN_IN,
+    payload: request,
+  };
+}
+
+export function autoSignIn(refreshToken) {
+  const request = axios({
+    method: 'POST',
+    url: AUTOSIGNIN,
+    data: {
+      grant_type: 'refresh_token',
+      refresh_token: refreshToken,
+    },
+    header: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+  })
+    .then(response => {
+      return response.data;
+    })
+    .catch(e => {
+      return false;
+    });
+
+  return {
+    type: AUTO_SIGN_IN,
     payload: request,
   };
 }
