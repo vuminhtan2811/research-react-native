@@ -3,6 +3,7 @@ import {RootNavigation} from './routes';
 class App extends Component {
   render() {
     const Nav = RootNavigation();
+    console.disableYellowBox = true;
     return <Nav />;
   }
 }

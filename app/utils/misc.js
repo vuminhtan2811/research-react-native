@@ -9,6 +9,8 @@ export const firebaseConfig = {
   measurementId: 'G-D5T9C49W7X',
 };
 
+export const FIREBASEURL = firebaseConfig.databaseURL;
+
 export const SIGNUP = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${firebaseConfig.apiKey}
 `;
 
@@ -16,3 +18,19 @@ export const SIGNIN = `https://identitytoolkit.googleapis.com/v1/accounts:signIn
 `;
 
 export const AUTOSIGNIN = `https://securetoken.googleapis.com/v1/token?key=${firebaseConfig.apiKey}`;
+
+export const convertFirebase = data => {
+  let newData = [];
+  for (let key in data) {
+    newData.push({
+      ...data[key],
+      id: key,
+    });
+  }
+  return newData;
+};
+
+export const findTeamData = (id, teams) => {
+  let value = teams.find(team => (team.id = id));
+  return value;
+};

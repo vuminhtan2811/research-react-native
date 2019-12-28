@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-
+import {connect} from 'react-redux';
+import {getGames} from '../../store/actions/games_action';
 class GameComponent extends Component {
+  componentDidMount() {
+    this.props.dispatch(getGames());
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -17,4 +21,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-export default GameComponent;
+
+function mapStateToProps(state) {
+  return {
+    Games: state.Games,
+  };
+}
+export default connect(mapStateToProps)(GameComponent);
