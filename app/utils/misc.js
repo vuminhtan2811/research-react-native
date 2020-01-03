@@ -31,6 +31,6 @@ export const convertFirebase = data => {
 };
 
 export const findTeamData = (id, teams) => {
-  let value = teams.find(team => (team.id = id));
+  let value = teams.find(team => team.id === id);
   return value;
 };

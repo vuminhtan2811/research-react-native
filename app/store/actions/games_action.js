@@ -23,7 +23,6 @@ export function getGames() {
               localData: findTeamData(games[key].local, teams),
             });
           }
-          console.log(responseData);
           resolve(responseData);
         });
       })

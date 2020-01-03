@@ -180,6 +180,11 @@ class AuthFormComponent extends Component {
               onPress={this.changeFormType}
             />
           </View>
+          {this.state.type === 'Login' ? (
+            <View style={styles.button}>
+              <Button title="Login Later" onPress={() => this.props.goNext()} />
+            </View>
+          ) : null}
         </View>
       </View>
     );
